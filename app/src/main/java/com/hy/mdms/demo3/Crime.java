@@ -45,4 +45,11 @@ public class Crime {
     public void setSolved(boolean solved) {
         this.solved = solved;
     }
+
+    @Override
+    public String toString() {
+        return "Crime{" +
+                "title='" + title + '\'' +
+                '}';
+    }
 }

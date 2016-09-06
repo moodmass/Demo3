@@ -7,19 +7,10 @@ import android.os.Bundle;
 
 
 
-public class CrimeActivity extends Activity {
+public class CrimeActivity extends SingleFragmentActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crime);
-        FragmentManager fragmentManager = getFragmentManager();
-
-        Fragment fragment = fragmentManager.findFragmentById(R.id.fragmentContainer);
-
-        if (fragment == null) {
-            fragment = new CrimeFragment();
-            fragmentManager.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
-        }
+    protected Fragment createFragment() {
+        return new CrimeFragment();
     }
 }

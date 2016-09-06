@@ -11,6 +11,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import java.text.SimpleDateFormat;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -38,7 +40,8 @@ public class CrimeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_crime, container, false);
         ButterKnife.bind(this, v);
-        crimeDate.setText(crime.getDate().toString());
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        crimeDate.setText(sdf.format(crime.getDate()));
         crimeDate.setEnabled(false);
 
         crimeSolved.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -59,4 +62,6 @@ public class CrimeFragment extends Fragment {
                 break;
         }
     }
+
+
 }
