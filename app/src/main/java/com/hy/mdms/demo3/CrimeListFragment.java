@@ -1,16 +1,15 @@
 package com.hy.mdms.demo3;
 
-import android.app.ListFragment;
+
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,11 +34,14 @@ public class CrimeListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Crime crime = (Crime) (getListAdapter()).getItem(position);
-        Log.d(TAG, "onListItemClick: "+crime.getTitle());
-        Toast.makeText(getActivity(), crime.getTitle(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), CrimePagerActivity.class);
+        intent.putExtra(CrimeFragment.EXTRA_CRIME_ID, crime.getId());
+        startActivity(intent);
+//        Log.d(TAG, "onListItemClick: "+crime.getTitle());
+//        Toast.makeText(getActivity(), crime.getTitle(), Toast.LENGTH_SHORT).show();
     }
 
-    private  class CrimeAdapter extends ArrayAdapter<Crime>{
+    private  class CrimeAdapter extends ArrayAdapter<Crime> {
 
         public CrimeAdapter(ArrayList<Crime> crimes){
             super(getActivity(),0,crimes);
@@ -60,8 +62,11 @@ public class CrimeListFragment extends ListFragment {
             solvedCheckBox.setChecked(crime.isSolved());
             return convertView;
         }
-
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
+    }
 }

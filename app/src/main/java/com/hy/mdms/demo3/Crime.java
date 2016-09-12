@@ -1,5 +1,6 @@
 package com.hy.mdms.demo3;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -32,6 +33,14 @@ public class Crime {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getFormatDate() {
+        if (date != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return sdf.format(date);
+        }
+        return "";
     }
 
     public void setDate(Date date) {
